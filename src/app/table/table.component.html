@@ -1,58 +1,81 @@
 <div class="example-container mat-elevation-z8">
-	<mat-table #table [dataSource]="dataSource" multiTemplateDataRows matSort #sort="matSort">
-		<!--- Note that these columns can be defined in any order.
+  <mat-table
+    #table
+    [dataSource]="dataSource"
+    multiTemplateDataRows
+    matSort
+    #sort="matSort"
+  >
+    <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
 
-		<!-- Position Column -->
-		<ng-container matColumnDef="position">
-			<mat-header-cell *matHeaderCellDef mat-sort-header> No. </mat-header-cell>
-			<mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
-		</ng-container>
+    <!-- Position Column -->
+    <ng-container matColumnDef="position">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> No. </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.position }} </mat-cell>
+    </ng-container>
 
-		<!-- Name Column -->
-		<ng-container matColumnDef="name">
-			<mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
-			<mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
-		</ng-container>
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        Name
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.name }} </mat-cell>
+    </ng-container>
 
-		<!-- Weight Column -->
-		<ng-container matColumnDef="weight">
-			<mat-header-cell *matHeaderCellDef mat-sort-header> Weight </mat-header-cell>
-			<mat-cell *matCellDef="let element"> {{element.weight}} </mat-cell>
-		</ng-container>
+    <!-- Weight Column -->
+    <ng-container matColumnDef="weight">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        Weight
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.weight }} </mat-cell>
+    </ng-container>
 
-		<!-- Expanded Content Column - The detail row is made up of this one column -->
-		<ng-container matColumnDef="expandedDetail">
-			<mat-cell *matCellDef="let detail">
-				The symbol for {{detail.name}} is {{detail.symbol}}
-			</mat-cell>
-		</ng-container>
+    <!-- Expanded Content Column - The detail row is made up of this one column -->
+    <ng-container matColumnDef="expandedDetail">
+      <mat-cell *matCellDef="let detail">
+        The symbol for {{ detail.name }} is {{ detail.symbol }}
+      </mat-cell>
+    </ng-container>
 
-		<ng-container matColumnDef="action">
-			<mat-header-cell *matHeaderCellDef mat-sort-header> action </mat-header-cell>
-			<mat-cell *matCellDef="let element">
-				<button  mat-icon-button *ngIf="expandedElement != element" 
-                [class.expanded]="expandedElement == element"
-                (click)="expandedElement = element">
-                <mat-icon>keyboard_arrow_down</mat-icon>
+    <ng-container matColumnDef="action">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        action
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <button
+          mat-icon-button
+          *ngIf="expandedElement != element"
+          [class.expanded]="expandedElement == element"
+          (click)="expandedElement = element"
+        >
+          <mat-icon>keyboard_arrow_down</mat-icon>
         </button>
-				<button  mat-icon-button *ngIf="expandedElement == element" 
-                [class.expanded]="expandedElement == undefined"
-                (click)="expandedElement = undefined">
-                <mat-icon>keyboard_arrow_up</mat-icon>
+        <button
+          mat-icon-button
+          *ngIf="expandedElement == element"
+          [class.expanded]="expandedElement == undefined"
+          (click)="expandedElement = undefined"
+        >
+          <mat-icon>keyboard_arrow_up</mat-icon>
         </button>
-			</mat-cell>
-		</ng-container>
+      </mat-cell>
+    </ng-container>
 
-		<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-		<mat-row *matRowDef="let row; columns: displayedColumns;" matRipple class="element-row"></mat-row>
-		<mat-row *matRowDef="let row; columns: ['expandedDetail'];"
-			[@detailExpand]="row == expandedElement ? 'expanded' : 'collapsed'" style="overflow: hidden">
-		</mat-row>
-	</mat-table>
-	<mat-paginator class="paginator" #MatPaginator pageSize="5"></mat-paginator>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row
+      *matRowDef="let row; columns: displayedColumns"
+      class="element-row"
+    ></mat-row>
+    <mat-row
+      *matRowDef="let row; columns: ['expandedDetail']"
+      [@detailExpand]="row == expandedElement ? 'expanded' : 'collapsed'"
+      style="overflow: hidden"
+    >
+    </mat-row>
+  </mat-table>
+  <mat-paginator class="paginator" #MatPaginator pageSize="5"></mat-paginator>
 </div>
-
 
 <!-- Copyright 2017 Google Inc. All Rights Reserved.
     Use of this source code is governed by an MIT-style license that
